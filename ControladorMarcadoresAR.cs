@@ -8,7 +8,8 @@ using UnityEngine.XR.ARSubsystems;
 public class ControladorMarcadoresAR : MonoBehaviour
 {
     private ARTrackedImageManager gestorImagenesAR;
-
+    //Referencia al sistema de puntos
+    public GestorGamificacion sistemaGamificacion;
     void Awake()
     {
         // Enlaza la variable con el componente de Unity
@@ -59,7 +60,12 @@ public class ControladorMarcadoresAR : MonoBehaviour
             {
                 // Muestra el modelo 3D (el cubo placeholder por ahora)
                 imagenDectectada.gameObject.SetActive(true);
-                
+
+                //Le enviamos el nombre de la imagen al Gestor de Gamificación
+                if (sistemaGamificacion != null)
+                {
+                    sistemaGamificacion.RegistrarDescubrimiento(imagenDectectada.referenceImage.name);
+                }
                 // NOTA FUTURA: Aquí agregaremos el código para sumar puntos al usuario en Firebase
                 // o para reproducir el audio histórico.
             }
